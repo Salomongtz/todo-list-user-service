@@ -118,6 +118,6 @@ public class UserController {
     public Mono<ResponseEntity<String>> deleteUser(@PathVariable Long id) {
         return userService.deleteUser(id)
                 .then(Mono.just(ResponseEntity.ok("User with id " + id + " was deleted.")))
-                .switchIfEmpty(Mono.error(new UserNotFoundException(id)));
+                .onErrorResume(e -> Mono.error(new UserNotFoundException(id)));
     }
 }
