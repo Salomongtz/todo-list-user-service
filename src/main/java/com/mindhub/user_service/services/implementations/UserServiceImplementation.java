@@ -5,15 +5,12 @@ import com.mindhub.user_service.models.NewUserRecord;
 import com.mindhub.user_service.models.UserEntity;
 import com.mindhub.user_service.repositories.UserRepository;
 import com.mindhub.user_service.services.UserService;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.Arrays;
 
 
 @Service

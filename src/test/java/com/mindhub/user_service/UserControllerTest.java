@@ -11,7 +11,10 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
+
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -44,10 +47,10 @@ public void setUp() {
         when(userService.getUserById(userId)).thenReturn(Mono.just(userEntity));
 
         // When
-        Mono<UserDTO> actualUserDtoMono = userController.getUserById(userId);
+        Mono<ResponseEntity<UserDTO>> actualUserDtoMono = userController.getUserById(userId);
 
         // Then
-        UserDTO actualUserDto = actualUserDtoMono.block();
+        UserDTO actualUserDto = Objects.requireNonNull(actualUserDtoMono.block()).getBody();
         assert actualUserDto != null;
         assertEquals(expectedUserDto.getId(), actualUserDto.getId());
     }
