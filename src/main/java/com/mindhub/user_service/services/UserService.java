@@ -5,8 +5,6 @@ import com.mindhub.user_service.models.UserEntity;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Optional;
-
 public interface UserService {
     Mono<UserEntity> getUserById(Long id);
 
