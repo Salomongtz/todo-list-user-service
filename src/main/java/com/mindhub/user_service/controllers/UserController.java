@@ -53,30 +53,6 @@ public class UserController {
         return Mono.just(ResponseEntity.ok(userService.getAllUsers().map(UserDTO::new)));
     }
 
-    @PostMapping
-    @Operation(summary = "Create user")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "The user was created and returned."),
-            @ApiResponse(responseCode = "400", description = "The user data provided is invalid."),
-            @ApiResponse(responseCode = "500", description = "An unexpected error occurred.")
-    })
-    public Mono<ResponseEntity<String>> createUser(
-            @Parameter(
-                    name = "user",
-                    description = "The user to create.",
-                    example = """
-                            {
-                              "name": "John Doe",
-                              "email": "john.doe@example.com",
-                              "password": "password123"
-                            }
-                            """,
-                    required = true)
-            @RequestBody
-            NewUserRecord user) {
-        return userService.createUser(user).map(currentUser -> ResponseEntity.ok(user.name() + " was created."))
-                .onErrorResume(e -> Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage())));
-    }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update user")

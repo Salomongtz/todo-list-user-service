@@ -74,6 +74,12 @@ public class UserServiceImplementation implements UserService {
                 .switchIfEmpty(Mono.error(new UserNotFoundException(id)));
     }
 
+    @Override
+    public Mono<UserEntity> getUserByEmail(String username) {
+        return userRepository.findByEmail(username)
+                .switchIfEmpty(Mono.error(new UserNotFoundException(username)));
+    }
+
     private boolean isInvalidUserRecord(NewUserRecord newUser) {
         return newUser == null || newUser.name().isEmpty() || newUser.email().isEmpty();
     }

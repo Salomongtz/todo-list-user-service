@@ -5,6 +5,8 @@ import com.mindhub.user_service.models.UserEntity;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
+
 public interface UserService {
     Mono<UserEntity> getUserById(Long id);
 
@@ -16,4 +18,6 @@ public interface UserService {
     Mono<UserEntity> updateUser(Long id, NewUserRecord newUser);
 
     Mono<Void> deleteUser(Long id);
+
+    Mono<UserEntity> getUserByEmail(String username);
 }
